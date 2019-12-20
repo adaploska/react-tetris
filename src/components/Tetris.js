@@ -1,16 +1,27 @@
-import React, { Component } from "react";
+import React from "react";
+import Stage from "./Stage";
+import Display from "./Display";
+import StartButton from "./StartButton";
 
-import "./App.css";
-import Tetris from "./components/Tetris";
-
-const App = () => {
+const Tetris = () => {
   return (
     <div>
-      <Tetris />
+      <Stage />
+      <aside>
+        <Display text="Score" />
+        <Display text="Rows" />
+        <Display text="Level" />
+      </aside>
+
+      <StartButton />
     </div>
   );
 };
-// class App extends Component {
+
+export default Tetris;
+
+// import React, { Component } from "react";
+// class Tetris extends Component {
 //   constructor(props) {
 //     super(props);
 //     this.state = {
@@ -59,5 +70,4 @@ const App = () => {
 //     );
 //   }
 // }
-
-export default App;
+// export default Tetris;
