@@ -1,5 +1,4 @@
-import _ from "lodash";
-const TETROMINOS = {
+export const TETROMINOS = {
   0: { shape: [[0]], color: "0,0,0" },
   I: {
     shape: [
@@ -19,10 +18,7 @@ const TETROMINOS = {
     color: "223, 173, 36"
   },
   O: {
-    shape: [
-      ["O", "O"],
-      ["O", "O"]
-    ],
+    shape: [["O", "O"], ["O", "O"]],
     color: "223, 217, 36"
   },
   S: {
@@ -43,6 +39,5 @@ export const randomTetromino = () => {
   const randomElement =
     tetrominos[Math.floor(Math.random() * tetrominos.length)];
 
-  const testRandomLodash = tetrominos._.random(0, tetrominos.length);
   return TETROMINOS[randomElement];
 };

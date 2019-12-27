@@ -1,73 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
+//styled components
+import { StyledTetrisWrapper, StyledTetris } from "./styles/StyledTetris";
+//custom hooks
+import { usePlayer } from "./hooks/usePlayer";
+import { useStage } from "./hooks/useStage";
+
+//components
 import Stage from "./Stage";
 import Display from "./Display";
 import StartButton from "./StartButton";
 import { createStage } from "../gameHellpers";
-const Tetris = () => {
-  return (
-    <div>
-      <Stage stage={createStage()} />
-      <aside>
-        <Display text="Score" />
-        <Display text="Rows" />
-        <Display text="Level" />
-      </aside>
 
-      <StartButton />
-    </div>
+const Tetris = () => {
+  const [dropTime, setDropTime] = useState(null);
+  const [gameOver, setgameOver] = useState(false);
+  const [player, updatePlayerPos, resetPlayer] = usePlayer();
+  const [stage, setStage] = useStage(player);
+  const movePlayer = direction => {
+    updatePlayerPos({ x: direction, x: 0 });
+  };
+  const startGame = () => {
+    //reset everything
+    console.log("test");
+    setStage(createStage());
+    resetPlayer();
+  };
+  const drop = () => {
+    updatePlayerPos({ x: 0, y: 1, collided: false });
+  };
+  const dropPlayer = () => {
+    drop();
+  };
+
+  const move = ({ keyCode }) => {
+    if (!gameOver) {
+      if (keyCode === 37) {
+        movePlayer(-1);
+      } else if (keyCode === 39) {
+        movePlayer(1);
+      } else if (keyCode === 40) {
+        dropPlayer();
+      }
+    }
+  };
+
+  return (
+    <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)}>
+      <StyledTetris>
+        <Stage stage={createStage()} />
+        <aside>
+          {gameOver ? (
+            <Display gameOver={gameOver} text="Game Over" />
+          ) : (
+            <div>
+              <Display text="Score" />
+              <Display text="Rows" />
+              <Display text="Level" />
+            </div>
+          )}
+          <StartButton callback={startGame} />
+        </aside>
+      </StyledTetris>
+    </StyledTetrisWrapper>
   );
 };
 
 export default Tetris;
-
-// import React, { Component } from "react";
-// class Tetris extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       transform: 90,
-//       rotateStyle: { width: "100px", height: "30px", backgroundColor: "red" }
-//     };
-//   }
-//   rotateElement = event => {
-//     this.setState({
-//       transform: this.state.transform + 90
-//     });
-//     console.log(event);
-//     if (this.state.transform === 360) {
-//       this.setState({
-//         transform: 0
-//       });
-//     }
-//     // console.log("dd");
-//     // if (event.key === 38) {
-//     //   console.log("sss");
-//     // }
-//     // if (event.keyCode === 38) {
-//     //   console.log("38 key pressed");
-//     // }
-//     // let x = 20;
-//     let style = {
-//       transform: `rotate(${this.state.transform}deg)`,
-//       width: "100px",
-//       height: "30px",
-//       backgroundColor: "red"
-//     };
-//     this.setState({
-//       rotateStyle: style
-//     });
-//     return style;
-//   };
-//   render() {
-//     return (
-//       <div className="App" onKeyPress={e => this.rotateElement(e)}>
-//         <div
-//           style={this.state.rotateStyle}
-//           onClick={e => this.rotateElement(e)}
-//           className="test"
-//         ></div>
-//       </div>
-//     );
-//   }
-// }
-// export default Tetris;
