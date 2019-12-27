@@ -13,11 +13,12 @@ import { createStage } from "../gameHellpers";
 
 const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
-  const [gameOver, setgameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
   const [player, updatePlayerPos, resetPlayer] = usePlayer();
-  const [stage, setStage] = useStage(player);
+  const [stage, setStage] = useStage(player, resetPlayer);
+  console.log("re-render");
   const movePlayer = direction => {
-    updatePlayerPos({ x: direction, x: 0 });
+    updatePlayerPos({ x: direction, y: 0 });
   };
   const startGame = () => {
     //reset everything

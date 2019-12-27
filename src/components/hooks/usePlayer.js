@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { randomTetromino } from "../../tetrominos";
 import { STAGE_WIDTH } from "../../gameHellpers";
-
+let x = STAGE_WIDTH / 2 - 2;
 export const usePlayer = () => {
   const [player, setPlayer] = useState({
     pos: { x: 0, y: 0 },
@@ -13,7 +13,7 @@ export const usePlayer = () => {
     setPlayer(prev => ({
       ...prev,
       pos: { x: (prev.pos.x += x), y: (prev.pos.y += y) },
-      collided: collided
+      collided
     }));
   };
   const resetPlayer = useCallback(() => {
