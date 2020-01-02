@@ -1,11 +1,25 @@
 import { useState, useEffect } from "react";
 import { createStage } from "../../gameHellpers";
+import { act } from "react-dom/test-utils";
 
 export const useStage = (player, resetPlayer) => {
   const [stage, setStage] = useState(createStage());
+  const [rowsCleared, setRowsCleared] = useState();
 
   useEffect(() => {
-    console.log("cos");
+    setRowsCleared(0);
+
+    //remove row and add new in 0 index
+    const sweepRows = newStage =>
+      newStage.reduce((ack, row) => {
+        if (row.findIndex(cell => cell[0] === 0) === -1) {
+          setRowsCleared(prev => prev + 1);
+          ack.unshift(new Array(newStage[0].length).fill([0, "clear"]));
+          return ack;
+        }
+        ack.push(row);
+        return ack;
+      }, []);
     const updateStage = prevStage => {
       // First flush the stage
       const newStage = prevStage.map(row =>
@@ -23,12 +37,15 @@ export const useStage = (player, resetPlayer) => {
           }
         });
       });
-      // Then check if we collided
-
+      if (player.collided) {
+        console.log("collided");
+        resetPlayer();
+        return sweepRows(newStage);
+      }
       return newStage;
     };
 
     setStage(prev => updateStage(prev));
-  }, [player.collided, player.pos.x, player.pos.y, player.tetromino]);
-  return [stage, setStage];
+  }, [player, resetPlayer]);
+  return [stage, setStage, rowsCleared];
 };
