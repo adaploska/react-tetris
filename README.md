@@ -6,11 +6,11 @@ https://tetris-dfde6.firebaseapp.com/
 
 ## Game
 
-:arrow_up: => rotate emelent
-:arrow_left: => move left
-:arrow_right: => move right
-:arrow_down: => faster drop time
-space => faster drop time
+:arrow_up: => rotate emelent <br />
+:arrow_left: => move left <br />
+:arrow_right: => move right <br />
+:arrow_down: => faster drop time <br />
+space => faster drop time <br />
 
 ## Available Scripts
 
