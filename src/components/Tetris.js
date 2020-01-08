@@ -63,8 +63,19 @@ const Tetris = () => {
     if (!gameOver) {
       if (keyCode === 40) {
         console.log("inerval on");
+
         setDropTime(1000 / (level + 1) + 200);
       }
+    }
+
+    if (rows >= 2) {
+      setDropTime(800);
+    }
+    if (rows >= 4) {
+      setDropTime(500);
+    }
+    if (rows >= 8) {
+      setDropTime(200);
     }
   };
   const dropPlayer = () => {
@@ -74,6 +85,7 @@ const Tetris = () => {
   };
 
   const move = ({ keyCode }) => {
+    console.log(keyCode);
     if (!gameOver) {
       if (keyCode === 37) {
         movePlayer(-1);
@@ -84,6 +96,10 @@ const Tetris = () => {
       } else if (keyCode === 38) {
         playerRotate(stage, 1);
       }
+      // else if (keyCode === 32) {
+      //   console.log("szybciej"); TODO szybciej
+      //   setDropTime(300);
+      // }
     }
   };
   useInterval(() => {
