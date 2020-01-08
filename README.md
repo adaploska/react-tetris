@@ -5,6 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 https://tetris-dfde6.firebaseapp.com/
 
 ## Available Scripts
+:arrow_up:
 
 In the project directory, you can run:
 
