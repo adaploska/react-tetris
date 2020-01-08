@@ -4,8 +4,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 https://tetris-dfde6.firebaseapp.com/
 
+## Game
+
+:arrow_up: => rotate emelent
+:arrow_left: => move left
+:arrow_right: => move right
+:arrow_down: => faster drop time
+space => faster drop time
+
 ## Available Scripts
-:arrow_up:
 
 In the project directory, you can run:
 
