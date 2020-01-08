@@ -60,10 +60,15 @@ const Tetris = () => {
     }
   };
   const keyUp = ({ keyCode }) => {
+    console.log(gameOver);
     if (!gameOver) {
       if (keyCode === 40) {
         console.log("inerval on");
 
+        setDropTime(1000 / (level + 1) + 200);
+      }
+      if (keyCode === 32) {
+        console.log("space");
         setDropTime(1000 / (level + 1) + 200);
       }
     }
@@ -95,11 +100,9 @@ const Tetris = () => {
         dropPlayer();
       } else if (keyCode === 38) {
         playerRotate(stage, 1);
+      } else if (keyCode === 32) {
+        dropPlayer();
       }
-      // else if (keyCode === 32) {
-      //   console.log("szybciej"); TODO szybciej
-      //   setDropTime(300);
-      // }
     }
   };
   useInterval(() => {
